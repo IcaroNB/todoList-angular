@@ -1,50 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo } from '../models/Todo';
+import { Todo } from "src/app/models/Todo";
 
 @Component({
-  selector: 'app-todo',
+  selector: 'app-todos',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
 
-  
   todos!: Todo[];
-  inputTodo:string = "";
 
+  inputTodo:string = "";
   constructor() { }
 
   ngOnInit(): void {
-    this.todos = [
+    this.todos =  [
       {
-        content:"First Content",
-        completed:false
+        content: 'First todo',
+        completed: false
       },
       {
-        content:"Second Content",
-        completed:false
+        content: 'Second todo',
+        completed: false 
       }
-
     ]
   }
 
-  onToggle(id:number) {
-    this.todos.map((v, i) => {
-      if(i == id) v.completed = !v.completed;
+  onToggle (id:number) {
+    this.todos.map((v,i) => {
+      if (i==id) v.completed = !v.completed;
+
       return v;
     })
   }
+  deleteTool (id:number) {
+    this.todos = this.todos.filter((v ,i) => i !== id);
+  } 
 
-  deleteTool(id:number) {
-    this.todos = this.todos.filter((v, i) => i !== id)
-  }
-
-  addTodo() {
+  addTodo () {
     this.todos.push({
-      content:this.inputTodo, 
-      completed:false
-    });
-    
-  this.inputTodo = "";
-}
+      content:this.inputTodo,
+      completed: false
+    })
+    this.inputTodo="";
+  }
 }
